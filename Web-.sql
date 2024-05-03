@@ -1,81 +1,53 @@
--- creating database 
-CREATE DATABASE college;
+use college;
 
--- to use the database we created 
-USE college;
-
--- Creating a table in Database 
-CREATE TABLE student (
-	id INT PRIMARY KEY,
-    name VARCHAR (50),
-    age INT NOT NULL
-);
-
--- Inserting a data in table 
-INSERT INTO student VALUES(1, "Bishal", 22);
-INSERT INTO student VALUES(2, "Suvu", 19); 
-
--- selecting and printing output of data to view 
-SELECT * FROM student;
-
--- Best practise  
-CREATE DATABASE  IF NOT EXISTS college;
-DROP DATABASE IF EXISTS company;
-
--- to view all the database
-SHOW DATABASES;
-
--- to view all the table 
-SHOW TABLES;  
-
-CREATE TABLE account (
-	id INT PRIMARY KEY,
+-- create table into it 
+CREATE TABLE student(
+	rollno INT PRIMARY KEY,
     name VARCHAR(50),
-    salary BLOB(1000)
+    marks INT NOT NULL,
+	grade VARCHAR(1),
+    city VARCHAR(20)
 );
 
-SELECT * FROM account;
-
--- to delete a table of database 
-DROP TABLE account;
-
--- to insert a data in table 
-DROP TABLE IF EXISTS student;
-
--- create a database
-CREATE DATABASE XYZ;
-
--- FIRST USE A DATABASE
-USE XYZ;
-
-DROP TABLE IF EXISTS employee;
-
--- creating a table for employee again 
-CREATE TABLE employee (
-	id INT PRIMARY KEY,
-    name VARCHAR(100),
-    salary INT
-);
-
--- now select the table to see or view
-SELECT * FROM employee; 
-
--- insert a value of data in table employee
-INSERT INTO employee
-(id, name, salary)
+-- insert a data into table 
+INSERT INTO student
+(rollno, name, marks, grade, city)
 VALUES
-(1, "adam", 25000),
-(2, "bob", 30000 ),
-(3, "casey", 40000);
+(101, "anil", 78, "C", "Pune"), 
+(102, "bhumika", 93, "A", "Mumbai"),
+(103, "chetan", 85, "B", "Mumbai"),
+(104, "dhruv", 96, "A", "Delhi"),
+(105, "emanuel", 12, "F", "Delhi"),
+(106, "farah", 82, "B", "Delhi");
 
--- to view a table
-SELECT * FROM employee; 
+-- now view it all we use *
+SELECT * FROM student; 
+
+-- SELECT COMMAND DETAIL
+
+-- WHERE FOR CONDITION 
+
+SELECT DISTINCT city FROM student; -- Distinct is use to no duplicate data
+SELECT  * 
+FROM student
+WHERE marks BETWEEN 80 AND 90;
+
+SELECT *
+FROM student
+WHERE marks > 75
+LIMIT 3;
 
 
 
+-- Aggregate Function
+SELECT COUNT(marks)
+FROM student;
 
- 
-
+-- Group by Clause
+SELECT city, avg(marks)
+FROM student
+GROUP BY city
+ORDER BY avg(marks); 
 
 
 
