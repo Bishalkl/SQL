@@ -1,7 +1,7 @@
 use college;
 
 -- create table into it 
-CREATE TABLE student(
+CREATE TABLE students(
 	rollno INT PRIMARY KEY,
     name VARCHAR(50),
     marks INT NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE student(
 );
 
 -- insert a data into table 
-INSERT INTO student
+INSERT INTO students
 (rollno, name, marks, grade, city)
 VALUES
 (101, "anil", 78, "C", "Pune"), 
@@ -115,7 +115,7 @@ SELECT * FROM student;
 DELETE FROM student
 WHERE marks < 33; 
 
-SELECT * FROM student;
+SELECT * FROM students;
 
 -- Revisiting Foreign key
 CREATE TABLE dept (
@@ -135,9 +135,119 @@ ON DELETE CASCADE
 
 
 
+-- add drop and rename
+USE college;
+SELECT * FROM students;
+
+ALTER TABLE student
+ADD COLUMN age INT;
+
+ALTER TABLE student
+DROP COLUMN age;
+
+ALTER TABLE students
+RENAME TO students;
+
+SELECT * FROM student;
+
+ALTER TABLE student
+MODIFY COLUMN  marks FLOAT;
+
+ALTER TABLE student
+CHANGE marks mark INT;
+
+-- Truncate table 
+TRUNCATE TABLE student;
 
 
+CREATE DATABASE personal;
+USE personal;
 
+-- create table into it 
+CREATE TABLE students(
+	rollno INT PRIMARY KEY,
+    name VARCHAR(50),
+    marks INT NOT NULL,
+	grade VARCHAR(1),
+    city VARCHAR(20)
+);
+
+-- insert a data into table 
+INSERT INTO students
+(rollno, name, marks, grade, city)
+VALUES
+(101, "anil", 78, "C", "Pune"), 
+(102, "bhumika", 93, "A", "Mumbai"),
+(103, "chetan", 85, "B", "Mumbai"),
+(104, "dhruv", 96, "A", "Delhi"),
+(105, "emanuel", 12, "F", "Delhi"),
+(106, "farah", 82, "B", "Delhi");
+
+SELECT * FROM students;
+
+-- alter table first
+ALTER TABLE students
+
+-- now change name of column name to full name 
+CHANGE name full_name VARCHAR(50);
+
+-- TO DISABLE A SAFE MODE 
+SET SQL_SAFE_UPDATES = 1;
+
+-- Now delete all the studets who scored marks less than 80
+DELETE FROM students
+WHERE marks < 80;
+
+-- DELETE THE COLUMN OF GRADES
+ALTER TABLE students
+DROP COLUMN grade;
+
+DROP TABLE students;
+
+-- JOINS IN SQL
+
+-- Inner Join
+USE personal;
+CREATE TABLE student(
+	student_id int PRIMARY KEY,
+    name VARCHAR(50)
+);
+INSERT INTO student
+(student_id, name)
+VALUES
+(101, "adam"),
+(102, "bob"),
+(103, "casey");
+SELECT * FROM course;
+
+CREATE TABLE course(
+	student_id int,
+    course VARCHAR(50),
+    FOREIGN KEY (student_id) REFERENCES student(student_id)
+);
+
+INSERT INTO course
+(student_id, courses)
+VALUES
+(101, 'english'),
+(102, 'math'),
+(101, 'science'),
+(103, 'computer science');
+
+
+SELECT * FROM course;
+
+SELECT * 
+FROM student as s
+LEFT JOIN course as c
+ON s.student_id = c.student_id;
+
+SELECT * 
+FROM student as s
+RIGHT JOIN course as c
+ON s.student_id = c.student_ID
+WHERE s.student_id is NUll;
+-- done it  
 
 
 
